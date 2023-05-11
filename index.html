@@ -23,7 +23,7 @@
     doc.innerText = getInnerText(document.querySelectorAll(".item"))
     element.innerText = getInnerText(article.querySelectorAll(".item"));
     elementGlobal.innerText = getInnerText(article.querySelectorAll(".main .item"));
-    elementScoped.innerText = getInnerText(article.querySelectorAll(":scope.main .item"));
+    elementScoped.innerText = getInnerText(article.querySelectorAll(":scope .main .item"));
   </script>
 </head>
 <body>
@@ -52,7 +52,7 @@
     <pre id="elementGlobal"></pre>
     </p>
     <p>
-      element.querySelector(":scoped.main .item")
+      element.querySelector(":scope .main .item")
     <pre id="elementScoped"></pre>
     </p>
   </div>
