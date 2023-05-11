@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>querySelector and :scoped</title>
+  <style>
+    article {
+      padding-left: 20px;
+    }
+  </style>
+  <script type="module">
+    const doc = document.querySelector("#document");
+    const element = document.querySelector("#element");
+    const elementGlobal = document.querySelector("#elementGlobal");
+    const elementScoped = document.querySelector("#elementScoped");
+
+    const article = document.querySelector(".article");
+
+    function getInnerText(nodes) {
+      return [...nodes].map(el => el.innerText).join(",") || 'Nothing found';
+    }
+
+    doc.innerText = getInnerText(document.querySelectorAll(".item"))
+    element.innerText = getInnerText(article.querySelectorAll(".item"));
+    elementGlobal.innerText = getInnerText(article.querySelectorAll(".main .item"));
+    elementScoped.innerText = getInnerText(article.querySelectorAll(":scope.main .item"));
+  </script>
+</head>
+<body>
+<main class="main">
+  <h1>main</h1>
+  <div class="item">Item outside</div>
+  <article class="article">
+    <h2>article</h2>
+    <div class="item">Item inside</div>
+  </article>
+  <div>
+    <h2>.item</h2>
+    <p>
+      document.querySelector(".item")
+      <pre id="document"></pre>
+    </p>
+    <p>
+      element.querySelector(".item")
+      <pre id="element"></pre>
+    </p>
+  </div>
+  <div>
+    <h2>.main .item</h2>
+    <p>
+      document.querySelector(".main .item")
+    <pre id="elementGlobal"></pre>
+    </p>
+    <p>
+      element.querySelector(":scoped.main .item")
+    <pre id="elementScoped"></pre>
+    </p>
+  </div>
+</main>
+</body>
+</html>
